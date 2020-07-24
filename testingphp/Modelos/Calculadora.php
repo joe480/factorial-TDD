@@ -1,5 +1,8 @@
 <?php
 namespace    Modelos;
+
+use Exception;
+
 class Calculadora{
     public function __construct()
     {     
@@ -21,12 +24,11 @@ class Calculadora{
         }
         $result = 1;
         if($n<0){
-            for ($i=$n; $i < 0; $i++) { 
-              $result = $i*$result;  
-            }
+            return new Exception("error no puede ser negativo") ;
+            exit;
         }
         if($n>1){
-            for ($i=1; $i >= $n; $i++) { 
+            for ($i=2; $i <= $n; $i++) { 
               $result = $i*$result;  
             }
         }
@@ -34,10 +36,10 @@ class Calculadora{
     }
     public function calcularCombinatoria($x,$n){
         if($this->validardatos($x,$n)){
-            $result = ($this->calcularFactorial($x))/$this->calcularFactorial($x)*$this->calcularFactorial($n-$x);
+            $result = ($this->calcularFactorial($n))/($this->calcularFactorial($x)*$this->calcularFactorial($n-$x));
         }
         else{
-            $result= false;
+            $result= new Exception("error deben ser números");
         }
         return $result;
     }
